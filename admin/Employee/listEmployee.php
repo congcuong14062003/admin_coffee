@@ -58,7 +58,7 @@ include_once('../includes/sidebar.php');
 
                                         <td>
                                             <a href="deleteEmployeeAction.php?user_id=<?php echo $Prod["user_id"]; ?>"
-                                                class="btn btn-danger" value="<?= $Prod['user_id']; ?>"><i
+                                                class="btn btn-danger action_delete" value="<?= $Prod['user_id']; ?>"><i
                                                     class="fa-solid fa-trash" style="margin-right: 5px;"></i>Xóa
                                             </a>
                                         </td>
@@ -75,14 +75,6 @@ include_once('../includes/sidebar.php');
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        <?php if (isset($_SESSION['success'])): ?>
-            toastr.success("<?php echo $_SESSION['success']; ?>");
-            <?php unset($_SESSION['success']); ?>
-        <?php endif; ?>
-    });
-</script>
 <?php
 include_once('../includes/footer.php')
     ?>

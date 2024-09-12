@@ -81,14 +81,5 @@ require_once('../../config/cnDB.php');
     </script>
     <?php include('../includes/footer.php');
     ?>
-    <script>
-        $(document).ready(function () {
-            <?php if (isset($_SESSION['error'])): ?>
-                toastr.error("<?php echo $_SESSION['error']; ?>");
-                <?php unset($_SESSION['error']); ?>
-            <?php endif; ?>
-        });
-    </script>
 </body>
-
 </html>
