@@ -24,8 +24,8 @@
                                     <div class="card-body">
                                         <form action="./login_action.php" method="POST">
                                             <div class="form-floating mb-3">
-                                                <input required class="form-control" name="UserName"  type="text" placeholder="UserName" />
-                                                <label for="inputEmail">UserName</label>
+                                                <input required class="form-control" name="Email"  type="text" placeholder="Email" />
+                                                <label for="inputEmail">Email</label>
                                             </div>
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" name="UserPassword"  type="password" placeholder="Password" />
@@ -54,8 +54,6 @@
                 toastr.error("<?php echo $_SESSION['error_login']; ?>");
                 <?php unset($_SESSION['error_login']); ?>
             <?php endif; ?>
-         
-         
         });
     </script>
     </body>

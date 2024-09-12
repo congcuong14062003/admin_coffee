@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = mysqli_real_escape_string($connection, $_POST['username']);
     $email = mysqli_real_escape_string($connection, $_POST['email']);
     $password = mysqli_real_escape_string($connection, $_POST['password']);
-    $role = mysqli_real_escape_string($connection, $_POST['role']);
+    $role = mysqli_real_escape_string($connection, $_POST['role']); // role sẽ là 'admin' hoặc 'employee'
 
     // Câu lệnh thêm nhân viên
     $sqlInsert = "INSERT INTO users (username, email, password, role) VALUES ('$username', '$email', '$password', '$role')";
@@ -21,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 } else {
-    // Nếu không phải là POST request, chuyển hướng về trang thêm nhân viên
     header("Location: ./createEmployee.php");
     exit();
 }

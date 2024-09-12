@@ -1,24 +1,23 @@
 <?php
-session_start();
 include('../../config/cnDB.php');
 include('../includes/header.php');
 include_once('../includes/navbar_top.php');
 include_once('../includes/sidebar.php');
 ?>
-<!-- container-product -->
+<!-- container-Table -->
 <div class="container-fluid px-4">
     <ol class="breadcrumb mt-5">
-        <li class="breadcrumb-item active">Sản phẩm</li>
-        <li class="breadcrumb-item active">Danh sách sản phẩm</li>
+        <li class="breadcrumb-item active">Quản lý bàn ngồi</li>
+        <li class="breadcrumb-item active">Danh sách bàn</li>
     </ol>
     <div class="Prod">
 
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Danh sách sản phẩm</h4>
-                    <a href="./createProduct.php" class="btn btn-primary float-end">
-                        <i class="fa-solid fa-plus" style="margin-right: 5px;"></i>Thêm sản phẩm
+                    <h4>Danh sách bàn</h4>
+                    <a href="./createTable.php" class="btn btn-primary float-end">
+                        <i class="fa-solid fa-plus" style="margin-right: 5px;"></i>Thêm bàn
                     </a>
                 </div>
                 <div class="card-body">
@@ -26,13 +25,9 @@ include_once('../includes/sidebar.php');
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">Tên sản phẩm</th>
-                                <th scope="col">Ảnh</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Giá khuyến mại</th>
-                                <th scope="col">Tồn kho</th>
-                                <th scope="col">Đã bán</th>
-                                <th scope="col">Loại danh mục</th>
+                                <th scope="col">Tên bàn</th>
+                                <th scope="col">Số chỗ ngồi</th>
+                                <th scope="col">Trạng thái</th>
                                 <th scope="col">Sửa</th>
                                 <th scope="col">Xóa</th>
                             </tr>
@@ -43,33 +38,32 @@ include_once('../includes/sidebar.php');
                             $result = $connection->query($sql);
                             if ($result->num_rows > 0) {
                                 while ($Prod = $result->fetch_assoc()) {
-                            ?>
+                                    ?>
                                     <tr>
-                                        <td><?= $Prod['ProdId']; ?></td>
-                                        <td><?= $Prod['ProdName']; ?></td>
-                                        <td style="max-width: 150px"><img style="width: 100%;" src="../../images/<?= $Prod['ProdImage']; ?>" alt=""></td>
-                                        <td><?= number_format($Prod["ProdPrice"], 0, ',', '.')?></td>
-                                        <td><?= number_format($Prod["ProdPriceSale"], 0, ',', '.')?></td>
-                                        <td><?= $Prod['ProdQuantity']?></td>
-                                        <td><?= $Prod['ProdQuantityRemain']?></td>
-                                        <td><?= $Prod["ProdCategoryName"] ?></td>
+                                        <td><?= $Prod['table_id']; ?></td>
+                                        <td><?= $Prod['name_table']; ?></td>
+                                        <td><?= $Prod["table_number"] ?></td>
+                                        <td><?= $Prod["status"] ?></td>
                                         <td>
-                                            <a href="./editProduct.php?ProdId=<?= $Prod['ProdId'] ?>" class="btn btn-success">
+                                            <a href="./editTable.php?table_id=<?= $Prod['table_id'] ?>"
+                                                class="btn btn-success">
                                                 <i class="fa-solid fa-pen-to-square" style="margin-right: 5px;"></i>Sửa
                                             </a>
                                         </td>
 
 
                                         <td>
-                                            <a href="deleteProductAction.php?ProdId=<?php echo $Prod["ProdId"]; ?>" class="btn btn-danger action_delete" value="<?= $Prod['ProdId']; ?>"><i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Xóa
+                                            <a href="deleteTableAction.php?table_id=<?php echo $Prod["table_id"]; ?>"
+                                                class="btn btn-danger action_delete" value="<?= $Prod['table_id']; ?>"><i
+                                                    class="fa-solid fa-trash" style="margin-right: 5px;"></i>Xóa
                                             </a>
                                         </td>
 
                                     <?php } ?>
-                                    </tr>
+                                </tr>
                                 <?php
                             }
-                                ?>
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -80,7 +74,7 @@ include_once('../includes/sidebar.php');
 
 <?php
 include_once('../includes/footer.php')
-?>
+    ?>
 </body>
 
 </html>

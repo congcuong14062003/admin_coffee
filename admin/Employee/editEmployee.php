@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once('../../config/cnDB.php');
 include('../includes/header.php');
 include_once('../includes/navbar_top.php');
@@ -30,7 +29,7 @@ $dataProduct = mysqli_fetch_assoc($product);
 <body>
     <div class="container-fluid px-4">
         <ol class="breadcrumb mt-5">
-            <li class="breadcrumb-item active">Nhân viên</li>
+            <li class="breadcrumb-item active">Quản lý nhân viên</li>
             <li class="breadcrumb-item active">Sửa nhân viên</li>
         </ol>
         <div class="row">
@@ -57,13 +56,17 @@ $dataProduct = mysqli_fetch_assoc($product);
                             </div>
                             <div class="form-group">
                                 <label for="password">Mật khẩu</label>
-                                <input required type="password" class="form-control" name="password"
+                                <input required type="text" class="form-control" name="password"
                                     value="<?php echo $dataProduct['password'] ?>">
                             </div>
                             <div class="form-group">
-                                <label for="role">Quyền</label>
-                                <input required type="text" class="form-control" name="role"
-                                    value="<?php echo $dataProduct['role'] ?>">
+                                <label for="role">Quyền</label><br>
+                                <input type="radio" id="admin" name="role" value="admin" 
+                                    <?php echo ($dataProduct['role'] == 'admin') ? 'checked' : ''; ?> required>
+                                <label for="admin">Admin</label><br>
+                                <input type="radio" id="employee" name="role" value="employee" 
+                                    <?php echo ($dataProduct['role'] == 'employee') ? 'checked' : ''; ?> required>
+                                <label for="employee">Nhân viên</label>
                             </div>
                             <div class="form-group">
                                 <button name="add_product" type="submit" class="btn btn-primary mt-2">Cập nhật</button>
@@ -79,6 +82,14 @@ $dataProduct = mysqli_fetch_assoc($product);
     </div>
     <?php include('../includes/footer.php');
     ?>
+    <script>
+    $(document).ready(function () {
+        <?php if (isset($_SESSION['error'])): ?>
+            toastr.error("<?php echo $_SESSION['error']; ?>");
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
+    });
+</script>
 </body>
 
 </html>

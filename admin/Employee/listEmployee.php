@@ -36,35 +36,38 @@ include_once('../includes/sidebar.php');
                         </thead>
                         <tbody>
                             <?php
-                            $sql = "Select * from users where user_id != '$user_id'";
+                            $sql = "Select * from users where user_id != '$user_id' ORDER BY created_at DESC";
                             $result = $connection->query($sql);
                             if ($result->num_rows > 0) {
                                 while ($Prod = $result->fetch_assoc()) {
-                            ?>
+                                    ?>
                                     <tr>
                                         <td><?= $Prod['user_id']; ?></td>
                                         <td><?= $Prod['username']; ?></td>
-                                        <td><?= $Prod['email']?></td>
-                                        <td><?= $Prod['password']?></td>
+                                        <td><?= $Prod['email'] ?></td>
+                                        <td><?= $Prod['password'] ?></td>
                                         <td><?= $Prod["role"] ?></td>
                                         <td><?= $Prod["created_at"] ?></td>
                                         <td>
-                                            <a href="./editEmployee.php?user_id=<?= $Prod['user_id'] ?>" class="btn btn-success">
+                                            <a href="./editEmployee.php?user_id=<?= $Prod['user_id'] ?>"
+                                                class="btn btn-success">
                                                 <i class="fa-solid fa-pen-to-square" style="margin-right: 5px;"></i>Sửa
                                             </a>
                                         </td>
 
 
                                         <td>
-                                            <a href="deleteEmployeeAction.php?user_id=<?php echo $Prod["user_id"]; ?>" class="btn btn-danger action_delete" value="<?= $Prod['user_id']; ?>"><i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Xóa
+                                            <a href="deleteEmployeeAction.php?user_id=<?php echo $Prod["user_id"]; ?>"
+                                                class="btn btn-danger" value="<?= $Prod['user_id']; ?>"><i
+                                                    class="fa-solid fa-trash" style="margin-right: 5px;"></i>Xóa
                                             </a>
                                         </td>
 
                                     <?php } ?>
-                                    </tr>
+                                </tr>
                                 <?php
                             }
-                                ?>
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -72,10 +75,18 @@ include_once('../includes/sidebar.php');
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function () {
+        <?php if (isset($_SESSION['success'])): ?>
+            toastr.success("<?php echo $_SESSION['success']; ?>");
+            <?php unset($_SESSION['success']); ?>
+        <?php endif; ?>
+    });
+</script>
 <?php
 include_once('../includes/footer.php')
-?>
+    ?>
+
 </body>
 
 </html>

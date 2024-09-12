@@ -1,35 +1,35 @@
-<?php 
+<?php
 session_start();
 require_once('../../config/cnDB.php');
-if (isset($_POST['slCid'])) {
-    $catename = $_POST["slCid"];
-    $userid = $_SESSION["UserId"];
-    $pname = $_POST['pname'];
-    $pdesc = $_POST['pdesc'];
-    $pquantity = $_POST['pquantity'];
-    $pprice = $_POST['pprice'];
-    $ppricesale = $_POST['ppricesale'];
-    // var_dump($_FILES);
-    if (isset($_FILES['pimage'])) {
-        $file = $_FILES['pimage'];
-        $file_name = $file['name'];
-        if(strpos($file['type'], 'image/') === 0) {
-            move_uploaded_file($file['tmp_name'], '../../images/' . $file_name);
-            $sqlinsert = "insert into Product(ProdName, ProdDescription, ProdImage, ProdPrice, ProdPriceSale, ProdQuantity,ProdCategoryName, UserId) values('" . $pname . "','" . $pdesc . "','" . $file_name . "'," . $pprice . "," . $ppricesale . "," . $pquantity . ",'".$catename."'," . $userid . ")";
-            $query = mysqli_query($connection, $sqlinsert);
-           
-            if ($query) {
-                echo "Thêm sản phẩm thành công";
-                header("Location: ./myProduct.php");
-            } else {
-                echo "Lỗi thêm sản phẩm";
-            }
-        } else {
-            echo"Không đúng định dạng";
-            $file_name = '';
-        }
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Lấy dữ liệu từ form
+    $name_table = mysqli_real_escape_string($connection, $_POST['name_table']);
+    $table_number = (int)$_POST['table_number'];
+
+    // Kiểm tra dữ liệu đầu vào
+    if (empty($name_table) || $table_number <= 0) {
+        $_SESSION['error'] = "Vui lòng nhập thông tin hợp lệ.";
+        header("Location: ./createTable.php");
+        exit();
     }
 
-   
+    // Thêm bàn mới vào database
+    $sqlInsert = "INSERT INTO Tables (name_table, table_number, number_customer_id, status) 
+                  VALUES ('$name_table', $table_number, 0, 'free')";
+
+    if (mysqli_query($connection, $sqlInsert)) {
+        $_SESSION['success'] = "Thêm bàn thành công!";
+        header("Location: ./listTable.php");
+        exit();
+    } else {
+        $_SESSION['error'] = "Có lỗi xảy ra khi thêm bàn: " . mysqli_error($connection);
+        header("Location: ./createTable.php");
+        exit();
+    }
+} else {
+    // Nếu không phải POST request, chuyển hướng về trang thêm bàn
+    header("Location: ./createTable.php");
+    exit();
 }
 ?>

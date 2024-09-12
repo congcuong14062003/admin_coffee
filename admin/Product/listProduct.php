@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('../../config/cnDB.php');
 include('../includes/header.php');
 include_once('../includes/navbar_top.php');
@@ -44,7 +43,7 @@ include_once('../includes/sidebar.php');
                                     <tr>
                                         <td><?= $Prod['product_id']; ?></td>
                                         <td><?= $Prod['name']; ?></td>
-                                        <td style="max-width: 150px"><img style="width: 100%;" src="../../images/<?= $Prod['image_url']; ?>" alt=""></td>
+                                        <td style="max-width: 200px; "><img style="width: 100%;  max-height: 200px;  object-fit: contain" src="../../images/<?= $Prod['image_url']; ?>" alt=""></td>
                                         <td><?= number_format($Prod["price"], 0, ',', '.')?></td>
                                         <td><?= $Prod['created_at']?></td>
                                         <td>

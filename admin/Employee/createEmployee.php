@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('../includes/header.php');
 include_once('../includes/navbar_top.php');
 include_once('../includes/sidebar.php');
@@ -44,11 +43,14 @@ require_once('../../config/cnDB.php');
                             </div>
                             <div class="form-group">
                                 <label for="password">Mật khẩu</label>
-                                <input required type="password" class="form-control" name="password" val>
+                                <input required type="text" class="form-control" name="password" val>
                             </div>
                             <div class="form-group">
-                                <label for="role">Quyền</label>
-                                <input required type="text" class="form-control" name="role">
+                                <label for="role">Quyền</label><br>
+                                <input type="radio" id="admin" name="role" value="admin" required>
+                                <label for="admin">Admin</label><br>
+                                <input type="radio" id="employee" name="role" value="employee" required>
+                                <label for="employee">Nhân viên</label>
                             </div>
                             <button name="add_employee" class="btn btn-primary mt-2" type="submit">Thêm nhân
                                 viên</button>
@@ -79,6 +81,14 @@ require_once('../../config/cnDB.php');
     </script>
     <?php include('../includes/footer.php');
     ?>
+    <script>
+        $(document).ready(function () {
+            <?php if (isset($_SESSION['error'])): ?>
+                toastr.error("<?php echo $_SESSION['error']; ?>");
+                <?php unset($_SESSION['error']); ?>
+            <?php endif; ?>
+        });
+    </script>
 </body>
 
 </html>

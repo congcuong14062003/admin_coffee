@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('../includes/header.php');
 include_once('../includes/navbar_top.php');
 include_once('../includes/sidebar.php');
@@ -44,7 +43,7 @@ require_once('../../config/cnDB.php');
                                 <label for="image_prod">Ảnh sản phẩm</label>
                                 <input type="file" id="image_prod" class="form-control" name="image_url">
                                 <label for="image_prod">
-                                    <img class="preview" style="width: 130px; margin: 50px; border: 1px dotted" src="https://icons-for-free.com/iconfiles/png/512/upload+export+upload+upload+to+cloud+icon-1320165659391053645.png" alt="">
+                                    <img class="preview" style="width: 130px; margin: 50px; border: 1px dotted" src="" alt="">
                                 </label>
                             </div>
                             <button name="add_product" class="btn btn-primary mt-2" type="submit">Đăng sản phẩm</button>

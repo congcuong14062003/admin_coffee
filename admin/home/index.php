@@ -1,5 +1,6 @@
 <?php
-    session_start();
+    include('../includes/header.php');
+
     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         // Đã đăng nhập, bạn có thể truy cập thông tin người dùng
         $currentUser = $_SESSION['current_user'];
@@ -10,7 +11,6 @@
     }
 
     include('../../config/cnDB.php');
-    include('../includes/header.php');
     include('../includes/footer.php');
 ?>
     
